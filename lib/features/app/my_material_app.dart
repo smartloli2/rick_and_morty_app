@@ -12,11 +12,11 @@ class MyMaterialApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-          title: Strings.appTitle,
+          title: Strings.appHeader,
+          // Todo(dartloli): move all colors to themes
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          // themeMode: context
-          //     .select((ThemeCubit themeCubit) => themeCubit.state.themeMode),
+          // Todo(dartloli): add themeMode
           debugShowCheckedModeBanner: false,
           initialRoute: AppRouter.initialRoute,
           onGenerateRoute: AppRouter.onGenerateRoute,

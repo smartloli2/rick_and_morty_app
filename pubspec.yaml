@@ -15,6 +15,7 @@ dependencies:
   dartz: ^0.10.0-nullsafety.2
   mobx: ^2.0.0
   flutter_mobx: ^2.0.0
+  flutter_hooks: ^0.18.0
   get_it: ^6.0.0
   hive: ^2.0.4
   hive_flutter: ^1.0.0
@@ -31,3 +32,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+fonts:
+  - family: Lato
+    fonts:
+      - asset: assets/fonts/Lato-Regular.ttf
+      - asset: assets/fonts/Lato-Bold.ttf
+        weight: 700
+  - family: Anton
+    fonts:
+      - asset: assets/fonts/Anton-Regular.ttf
