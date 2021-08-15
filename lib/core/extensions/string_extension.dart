@@ -1,10 +1,12 @@
-extension StringExtension on String? {
-  static final RegExp whitespacePattern = RegExp(r'\s');
-
-  String? capitalize() {
-    if (this == null) return null;
-    return "${this![0].toUpperCase()}${this!.substring(1)}";
+extension StringExtension on String {
+  String get capitalize {
+    if (isEmpty) return '';
+    return "${this[0].toUpperCase()}${substring(1)}";
   }
+}
+
+extension NullableStringExtension on String? {
+  static final RegExp whitespacePattern = RegExp(r'\s');
 
   bool get hasWhitespaces => whitespacePattern.hasMatch(this ?? '');
 

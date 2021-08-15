@@ -3,7 +3,6 @@
 ##
 analyzer:
   exclude:
-    # I'd like to use a snack case for icons name
     - "**/assets.dart"
     - "**/*.g.dart"
     - "**/*.freezed.dart"

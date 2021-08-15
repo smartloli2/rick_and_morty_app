@@ -1,4 +1,9 @@
-class RouteException implements Exception {
-  final String message;
-  const RouteException(this.message);
+import 'exception.dart';
+
+class RouteException extends BussinessException {
+  const RouteException(String message) : super(message);
+}
+
+class InvalidNavArgumentsException extends BussinessException {
+  const InvalidNavArgumentsException(String message) : super(message);
 }
