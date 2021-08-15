@@ -9,13 +9,13 @@ class RickAndMortyRepository {
   const RickAndMortyRepository(this.rickAndMortyApi);
 
   // Todo: domain transformations?
-  Future<Either<RickAndMortyApiException, Characters>> getCharacters(
+  Future<Either<RickAndMortyException, Characters>> getCharacters(
     String filterName,
   ) async {
     try {
       final response = await rickAndMortyApi.getCharacters(filterName);
       return right(response);
-    } on RickAndMortyApiException catch (e) {
+    } on RickAndMortyException catch (e) {
       log.error(e.toString());
       return left(e);
     }
