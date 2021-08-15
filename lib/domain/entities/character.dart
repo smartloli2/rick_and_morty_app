@@ -1,11 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:rick_and_morty_app/domain/entities/character_location.dart';
 
-import 'character_location.dart';
-
-part 'character.g.dart';
-
-@JsonSerializable()
 class Character extends Equatable {
   final int id;
   final String name;
@@ -34,11 +29,6 @@ class Character extends Equatable {
     required this.url,
     required this.created,
   });
-
-  factory Character.fromJson(Map<String, dynamic> json) =>
-      _$CharacterFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CharacterToJson(this);
 
   @override
   List<Object?> get props => [id];

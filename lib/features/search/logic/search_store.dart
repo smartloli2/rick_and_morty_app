@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
 import 'package:rick_and_morty_app/core/exceptions/exception.dart';
 import 'package:rick_and_morty_app/core/log/i_log.dart';
-import 'package:rick_and_morty_app/data/api/models/character.dart';
-import 'package:rick_and_morty_app/data/api/models/characters.dart';
 import 'package:rick_and_morty_app/data/repositories/rick_and_morty_repository.dart';
+import 'package:rick_and_morty_app/domain/entities/character.dart';
+import 'package:rick_and_morty_app/domain/entities/characters.dart';
 import 'package:rick_and_morty_app/features/search/logic/search_state.dart';
 
 part 'search_store.g.dart';
@@ -32,6 +32,7 @@ abstract class _SearchStore with Store {
   @computed
   List<Character>? get characterList => characters?.results;
 
+  // Todo: change state
   @computed
   SearchState get state {
     if (_charactersFuture == null ||

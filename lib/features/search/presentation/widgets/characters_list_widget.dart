@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/core/extensions/string_extension.dart';
-import 'package:rick_and_morty_app/data/api/models/character.dart';
+import 'package:rick_and_morty_app/domain/entities/character.dart';
 import 'package:rick_and_morty_app/features/character_details/presentation/character_details_screen.dart';
 
 class CharactersListWidget extends StatelessWidget {

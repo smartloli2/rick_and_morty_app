@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_app/core/exceptions/exception.dart';
 import 'package:rick_and_morty_app/core/exceptions/route_exception.dart';
 import 'package:rick_and_morty_app/core/log/i_log.dart';
 import 'package:rick_and_morty_app/core/store_providers.dart';

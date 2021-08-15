@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rick_and_morty_app/data/api/models/character_hint.dart';
-import 'package:rick_and_morty_app/data/api/models/characters.dart';
+import 'package:rick_and_morty_app/data/api/models/character_hint_dto.dart';
+import 'package:rick_and_morty_app/data/api/models/characters_dto.dart';
 import 'package:rick_and_morty_app/data/api/rick_and_morty_api.dart';
 
 import '../fixtures/fixture_reader.dart';
@@ -98,7 +98,7 @@ void main() {
 
   group('getCharacters', () {
     const filterName = 'rick';
-    final charactersModel = Characters.fromJson(json
+    final charactersModel = CharactersDto.fromJson(json
         .decode(fixture('filtered_characters_on_request_$filterName.json')));
 
     test(
@@ -148,10 +148,10 @@ void main() {
   group('getCharacterHints', () {
     const filterName = 'morty';
 
-    final List<CharacterHint> characterHints = (json.decode(fixture(
+    final List<CharacterHintDto> characterHints = (json.decode(fixture(
       'filtered_character_hints_on_request_$filterName.json',
     ))['data']['characters']['results'] as List)
-        .map<CharacterHint>((e) => CharacterHint.fromJson(e))
+        .map<CharacterHintDto>((e) => CharacterHintDto.fromJson(e))
         .toList();
 
     test(

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'info.dart';
+part of 'info_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Info _$InfoFromJson(Map<String, dynamic> json) {
-  return Info(
+InfoDto _$InfoDtoFromJson(Map<String, dynamic> json) {
+  return InfoDto(
     count: json['count'] as int,
     pages: json['pages'] as int,
     next: json['next'] as String?,
@@ -15,7 +15,7 @@ Info _$InfoFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$InfoToJson(Info instance) => <String, dynamic>{
+Map<String, dynamic> _$InfoDtoToJson(InfoDto instance) => <String, dynamic>{
       'count': instance.count,
       'pages': instance.pages,
       'next': instance.next,

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:rick_and_morty_app/core/exceptions/exception.dart';
-import 'package:rick_and_morty_app/data/api/models/character_hint.dart';
-import 'package:rick_and_morty_app/data/api/models/characters.dart';
+import 'package:rick_and_morty_app/data/api/models/character_hint_dto.dart';
+import 'package:rick_and_morty_app/data/api/models/characters_dto.dart';
 
 import 'i_rick_and_morty_api.dart';
 
@@ -29,12 +29,12 @@ class RickAndMortyApi implements IRickAndMortyApi {
 
   // Todo: replace filterName on CharacterFilter
   @override
-  Future<Characters> getCharacters(String filterName) async {
+  Future<CharactersDto> getCharacters(String filterName) async {
     try {
       final Response response = await dio.get('character?name=$filterName');
 
       if (response.statusCode == 200) {
-        return Characters.fromJson(response.data);
+        return CharactersDto.fromJson(response.data);
       }
 
       throw RickAndMortyException(
@@ -47,7 +47,7 @@ class RickAndMortyApi implements IRickAndMortyApi {
   }
 
   @override
-  Future<List<CharacterHint>> getCharacterHints(
+  Future<List<CharacterHintDto>> getCharacterHints(
     String filterName,
   ) async {
     final gqlQuery =
@@ -62,7 +62,7 @@ class RickAndMortyApi implements IRickAndMortyApi {
 
     if (response.statusCode == 200) {
       return (response.data['data']['characters']['results'] as List)
-          .map((e) => CharacterHint.fromJson(e))
+          .map((e) => CharacterHintDto.fromJson(e))
           .toList();
     }
 

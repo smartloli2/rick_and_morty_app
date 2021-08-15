@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rick_and_morty_app/data/api/models/character.dart';
+import 'package:rick_and_morty_app/domain/entities/character.dart';
 
 part 'search_state.freezed.dart';
 

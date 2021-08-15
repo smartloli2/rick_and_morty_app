@@ -1,19 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'character_location.dart';
+part of 'character_location_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CharacterLocation _$CharacterLocationFromJson(Map<String, dynamic> json) {
-  return CharacterLocation(
+CharacterLocationDto _$CharacterLocationDtoFromJson(Map<String, dynamic> json) {
+  return CharacterLocationDto(
     name: json['name'] as String,
     url: json['url'] as String,
   );
 }
 
-Map<String, dynamic> _$CharacterLocationToJson(CharacterLocation instance) =>
+Map<String, dynamic> _$CharacterLocationDtoToJson(
+        CharacterLocationDto instance) =>
     <String, dynamic>{
       'name': instance.name,
       'url': instance.url,

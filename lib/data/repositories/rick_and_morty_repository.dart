@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:rick_and_morty_app/core/log/i_log.dart';
-import 'package:rick_and_morty_app/data/api/models/characters.dart';
 import 'package:rick_and_morty_app/data/api/rick_and_morty_api.dart';
+import 'package:rick_and_morty_app/domain/entities/characters.dart';
 
 class RickAndMortyRepository {
   final RickAndMortyApi rickAndMortyApi;
@@ -14,7 +14,7 @@ class RickAndMortyRepository {
   ) async {
     try {
       final response = await rickAndMortyApi.getCharacters(filterName);
-      return right(response);
+      return right(response.toDomain());
     } on RickAndMortyException catch (e) {
       log.error(e.toString());
       return left(e);
