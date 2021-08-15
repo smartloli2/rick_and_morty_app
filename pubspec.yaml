@@ -26,6 +26,8 @@ dependencies:
   logger: ^1.0.0
   sizer: ^2.0.13
   provider: ^5.0.0
+  mockito: ^5.0.0
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
