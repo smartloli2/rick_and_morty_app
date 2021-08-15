@@ -12,7 +12,7 @@ class RickAndMortyApi implements IRickAndMortyApi {
       'https://rickandmortyapi.com/api/';
 
   final Dio dio;
-  // Todo: check the internet connection and throw corresponding exception
+  // Todo: check the internet connection and throw a corresponding exception
   // final Connectivity connectivity;
 
   RickAndMortyApi({
