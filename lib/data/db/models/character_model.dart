@@ -32,6 +32,8 @@ class CharacterModel extends Equatable {
   final String url;
   @HiveField(11)
   final DateTime created;
+  @HiveField(12)
+  final String cachedImageId;
 
   const CharacterModel({
     required this.id,
@@ -46,6 +48,7 @@ class CharacterModel extends Equatable {
     required this.episode,
     required this.url,
     required this.created,
+    required this.cachedImageId,
   });
 
   @override
@@ -68,6 +71,7 @@ class CharacterModel extends Equatable {
 
   factory CharacterModel.fromDomain(
     Character character,
+    String cachedImageId,
   ) =>
       CharacterModel(
         id: character.id,
@@ -82,5 +86,6 @@ class CharacterModel extends Equatable {
         episode: character.episode,
         url: character.url,
         created: character.created,
+        cachedImageId: cachedImageId,
       );
 }

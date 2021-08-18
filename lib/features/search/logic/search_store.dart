@@ -1,64 +1,111 @@
-import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
-import 'package:rick_and_morty_app/core/exceptions/exception.dart';
 import 'package:rick_and_morty_app/core/log/i_log.dart';
-import 'package:rick_and_morty_app/data/repositories/rick_and_morty_repository.dart';
+import 'package:rick_and_morty_app/data/repositories/character_repository.dart';
+import 'package:rick_and_morty_app/data/repositories/search_request_repository.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
-import 'package:rick_and_morty_app/domain/entities/characters.dart';
+import 'package:rick_and_morty_app/domain/entities/search_request.dart';
 import 'package:rick_and_morty_app/features/search/logic/search_state.dart';
 
 part 'search_store.g.dart';
 
 class SearchStore extends _SearchStore with _$SearchStore {
-  SearchStore(
-    RickAndMortyRepository rickAndMortyRepository,
-  ) : super(rickAndMortyRepository);
+  SearchStore({
+    required CharacterRepository characterRepository,
+    required SearchRequestRepository searchRequestRepository,
+  }) : super(
+          characterRepository,
+          searchRequestRepository,
+        );
 }
 
 abstract class _SearchStore with Store {
-  final RickAndMortyRepository _rickAndMortyRepository;
+  final CharacterRepository _characterRepository;
+  final SearchRequestRepository _searchRequestRepository;
 
-  _SearchStore(this._rickAndMortyRepository);
-
-  @observable
-  ObservableFuture<Either<BussinessException, Characters>>? _charactersFuture;
-
-  @observable
-  Characters? characters;
+  _SearchStore(
+    this._characterRepository,
+    this._searchRequestRepository,
+  );
 
   @observable
-  Option<String> errorMessage = none();
+  SearchState searchState = const SearchState.initial();
 
-  @computed
-  List<Character>? get characterList => characters?.results;
+  // @observable
+  // Characters? characters;
 
-  // Todo: change state
-  @computed
-  SearchState get state {
-    if (_charactersFuture == null ||
-        _charactersFuture?.status == FutureStatus.rejected) {
-      return const SearchState.initial();
-    }
+  // @observable
+  // Option<String> errorMessage = none();
 
-    return _charactersFuture?.status == FutureStatus.pending
-        ? const SearchState.loading()
-        : SearchState.loaded(characters: characters!.results);
+  // Store
+  List<SearchRequest> _searchRequests = [];
+
+  @action
+  Future<void> showCharacters(String filterName) async {
+    // errorMessage = none();
+
+    searchState = const SearchState.loading();
+
+    final failOrCharacters =
+        await _characterRepository.getCharacters(filterName);
+
+    failOrCharacters.fold((e) {
+      searchState = const SearchState.showError(
+          message: "Couldn't fetch characters. Is the device online?");
+    }, (characters) {
+      // this.characters = characters;
+      log.info(characters.results.toString());
+      searchState = SearchState.showResults(characters: characters.results);
+    });
   }
 
   @action
-  Future<void> getCharacters(String filterName) async {
-    errorMessage = none();
+  Future<void> showSearchHistory() async {
+    searchState = const SearchState.loading();
 
-    _charactersFuture =
-        ObservableFuture(_rickAndMortyRepository.getCharacters(filterName));
+    final failOrRequests = await _searchRequestRepository.getAllRequests();
 
-    final failOrCharacters = await _charactersFuture;
+    failOrRequests.fold(
+      (l) {
+        log.error('Failed to get search requests');
+        searchState = const SearchState.showHistory([]);
+      },
+      (searchRequests) {
+        _searchRequests = searchRequests;
+        searchState = SearchState.showHistory(searchRequests);
+      },
+    );
+  }
 
-    failOrCharacters?.fold((e) {
-      errorMessage = some("Couldn't fetch characters. Is the device online?");
-    }, (characters) {
-      this.characters = characters;
-      log.info(characters.results.toString());
+  @action
+  Future<void> saveSearchRequest(String input) async {
+    final searchRequest =
+        SearchRequest(value: input, createdAtUtc: DateTime.now().toUtc());
+    final result = await _searchRequestRepository.saveRequest(searchRequest);
+
+    result.fold((l) {
+      log.warning('Failed to save search request');
+    }, (r) {
+      log.debug('Save request was saved successfully');
+      _searchRequests.add(searchRequest);
     });
+  }
+
+  @action
+  Future<void> deleteSearchRequest(SearchRequest searchRequest) async {
+    final result = await _searchRequestRepository.deleteRequest(searchRequest);
+
+    result.fold((l) {
+      log.warning('Failed to delete search request');
+    }, (r) {
+      log.debug('Save request was deleted successfully');
+      _searchRequests.remove(searchRequest);
+      searchState = SearchState.showHistory(_searchRequests);
+    });
+  }
+
+  @action
+  Future<void> cacheCharacter(Character character) async {
+    await _characterRepository.cacheSingleCharacter(character);
+    log.debug('Character ${character.name} was cached locally');
   }
 }

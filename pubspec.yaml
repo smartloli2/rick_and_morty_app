@@ -16,8 +16,10 @@ dependencies:
   dartz: ^0.10.0-nullsafety.2
   dio: ^4.0.0
   mobx: ^2.0.0
+  flutter_cache_manager: ^3.1.0
   flutter_mobx: ^2.0.0
   flutter_hooks: ^0.18.0
+  flutter_svg: ^0.22.0
   freezed: ^0.14.0
   get_it: ^6.0.0
   hive: ^2.0.4
@@ -28,6 +30,7 @@ dependencies:
   provider: ^5.0.0
   mockito: ^5.0.0
   equatable: ^2.0.3
+  uuid: ^3.0.4
 
 dev_dependencies:
   flutter_test:
@@ -38,13 +41,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/rick_and_morty_icon.svg
 
-fonts:
-  - family: Lato
-    fonts:
-      - asset: assets/fonts/Lato-Regular.ttf
-      - asset: assets/fonts/Lato-Bold.ttf
-        weight: 700
-  - family: Anton
-    fonts:
-      - asset: assets/fonts/Anton-Regular.ttf
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 700
+    - family: Anton
+      fonts:
+        - asset: assets/fonts/Anton-Regular.ttf

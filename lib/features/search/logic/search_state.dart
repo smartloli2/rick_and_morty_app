@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
+import 'package:rick_and_morty_app/domain/entities/search_request.dart';
 
 part 'search_state.freezed.dart';
 
@@ -7,10 +8,18 @@ part 'search_state.freezed.dart';
 @freezed
 class SearchState with _$SearchState {
   const factory SearchState.initial() = _Initial;
-  const factory SearchState.loading() = _Loading;
-  const factory SearchState.loaded({
-    required List<Character> characters,
-  }) = _Loaded;
-  // const factory SearchState.error([String? message]) = ErrorDetails;
 
+  const factory SearchState.loading() = _Loading;
+
+  const factory SearchState.showHistory(
+    List<SearchRequest> searchRequests,
+  ) = _ShowHistory;
+
+  const factory SearchState.showResults({
+    required List<Character> characters,
+  }) = _ShowResults;
+
+  const factory SearchState.showError({
+    required String? message,
+  }) = _ShowError;
 }

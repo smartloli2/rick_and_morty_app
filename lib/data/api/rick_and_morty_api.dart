@@ -27,7 +27,6 @@ class RickAndMortyApi implements IRickAndMortyApi {
     );
   }
 
-  // Todo: replace filterName on CharacterFilter
   @override
   Future<CharactersDto> getCharacters(String filterName) async {
     try {
@@ -36,6 +35,8 @@ class RickAndMortyApi implements IRickAndMortyApi {
       if (response.statusCode == 200) {
         return CharactersDto.fromJson(response.data);
       }
+
+      // Todo: добавить обработку ошибок (не удалось найти, неизвестная и т.д.)
 
       throw RickAndMortyException(
         'Server request failed: status code: ${response.statusCode},'

@@ -24,9 +24,21 @@ class _$SearchStateTearOff {
     return const _Loading();
   }
 
-  _Loaded loaded({required List<Character> characters}) {
-    return _Loaded(
+  _ShowHistory showHistory(List<SearchRequest> searchRequests) {
+    return _ShowHistory(
+      searchRequests,
+    );
+  }
+
+  _ShowResults showResults({required List<Character> characters}) {
+    return _ShowResults(
       characters: characters,
+    );
+  }
+
+  _ShowError showError({required String? message}) {
+    return _ShowError(
+      message: message,
     );
   }
 }
@@ -40,14 +52,18 @@ mixin _$SearchState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Character> characters) loaded,
+    required TResult Function(List<SearchRequest> searchRequests) showHistory,
+    required TResult Function(List<Character> characters) showResults,
+    required TResult Function(String? message) showError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Character> characters)? loaded,
+    TResult Function(List<SearchRequest> searchRequests)? showHistory,
+    TResult Function(List<Character> characters)? showResults,
+    TResult Function(String? message)? showError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,14 +71,18 @@ mixin _$SearchState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_ShowHistory value) showHistory,
+    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(_ShowError value) showError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(_ShowHistory value)? showHistory,
+    TResult Function(_ShowResults value)? showResults,
+    TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,7 +142,9 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Character> characters) loaded,
+    required TResult Function(List<SearchRequest> searchRequests) showHistory,
+    required TResult Function(List<Character> characters) showResults,
+    required TResult Function(String? message) showError,
   }) {
     return initial();
   }
@@ -132,7 +154,9 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Character> characters)? loaded,
+    TResult Function(List<SearchRequest> searchRequests)? showHistory,
+    TResult Function(List<Character> characters)? showResults,
+    TResult Function(String? message)? showError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -146,7 +170,9 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_ShowHistory value) showHistory,
+    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(_ShowError value) showError,
   }) {
     return initial(this);
   }
@@ -156,7 +182,9 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(_ShowHistory value)? showHistory,
+    TResult Function(_ShowResults value)? showResults,
+    TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -208,7 +236,9 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Character> characters) loaded,
+    required TResult Function(List<SearchRequest> searchRequests) showHistory,
+    required TResult Function(List<Character> characters) showResults,
+    required TResult Function(String? message) showError,
   }) {
     return loading();
   }
@@ -218,7 +248,9 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Character> characters)? loaded,
+    TResult Function(List<SearchRequest> searchRequests)? showHistory,
+    TResult Function(List<Character> characters)? showResults,
+    TResult Function(String? message)? showError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -232,7 +264,9 @@ class _$_Loading implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_ShowHistory value) showHistory,
+    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(_ShowError value) showError,
   }) {
     return loading(this);
   }
@@ -242,7 +276,9 @@ class _$_Loading implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(_ShowHistory value)? showHistory,
+    TResult Function(_ShowResults value)? showResults,
+    TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -257,26 +293,157 @@ abstract class _Loading implements SearchState {
 }
 
 /// @nodoc
-abstract class _$LoadedCopyWith<$Res> {
-  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
-      __$LoadedCopyWithImpl<$Res>;
+abstract class _$ShowHistoryCopyWith<$Res> {
+  factory _$ShowHistoryCopyWith(
+          _ShowHistory value, $Res Function(_ShowHistory) then) =
+      __$ShowHistoryCopyWithImpl<$Res>;
+  $Res call({List<SearchRequest> searchRequests});
+}
+
+/// @nodoc
+class __$ShowHistoryCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
+    implements _$ShowHistoryCopyWith<$Res> {
+  __$ShowHistoryCopyWithImpl(
+      _ShowHistory _value, $Res Function(_ShowHistory) _then)
+      : super(_value, (v) => _then(v as _ShowHistory));
+
+  @override
+  _ShowHistory get _value => super._value as _ShowHistory;
+
+  @override
+  $Res call({
+    Object? searchRequests = freezed,
+  }) {
+    return _then(_ShowHistory(
+      searchRequests == freezed
+          ? _value.searchRequests
+          : searchRequests // ignore: cast_nullable_to_non_nullable
+              as List<SearchRequest>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_ShowHistory implements _ShowHistory {
+  const _$_ShowHistory(this.searchRequests);
+
+  @override
+  final List<SearchRequest> searchRequests;
+
+  @override
+  String toString() {
+    return 'SearchState.showHistory(searchRequests: $searchRequests)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ShowHistory &&
+            (identical(other.searchRequests, searchRequests) ||
+                const DeepCollectionEquality()
+                    .equals(other.searchRequests, searchRequests)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(searchRequests);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ShowHistoryCopyWith<_ShowHistory> get copyWith =>
+      __$ShowHistoryCopyWithImpl<_ShowHistory>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<SearchRequest> searchRequests) showHistory,
+    required TResult Function(List<Character> characters) showResults,
+    required TResult Function(String? message) showError,
+  }) {
+    return showHistory(searchRequests);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<SearchRequest> searchRequests)? showHistory,
+    TResult Function(List<Character> characters)? showResults,
+    TResult Function(String? message)? showError,
+    required TResult orElse(),
+  }) {
+    if (showHistory != null) {
+      return showHistory(searchRequests);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_ShowHistory value) showHistory,
+    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(_ShowError value) showError,
+  }) {
+    return showHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_ShowHistory value)? showHistory,
+    TResult Function(_ShowResults value)? showResults,
+    TResult Function(_ShowError value)? showError,
+    required TResult orElse(),
+  }) {
+    if (showHistory != null) {
+      return showHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowHistory implements SearchState {
+  const factory _ShowHistory(List<SearchRequest> searchRequests) =
+      _$_ShowHistory;
+
+  List<SearchRequest> get searchRequests => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ShowHistoryCopyWith<_ShowHistory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ShowResultsCopyWith<$Res> {
+  factory _$ShowResultsCopyWith(
+          _ShowResults value, $Res Function(_ShowResults) then) =
+      __$ShowResultsCopyWithImpl<$Res>;
   $Res call({List<Character> characters});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
-    implements _$LoadedCopyWith<$Res> {
-  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
-      : super(_value, (v) => _then(v as _Loaded));
+class __$ShowResultsCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
+    implements _$ShowResultsCopyWith<$Res> {
+  __$ShowResultsCopyWithImpl(
+      _ShowResults _value, $Res Function(_ShowResults) _then)
+      : super(_value, (v) => _then(v as _ShowResults));
 
   @override
-  _Loaded get _value => super._value as _Loaded;
+  _ShowResults get _value => super._value as _ShowResults;
 
   @override
   $Res call({
     Object? characters = freezed,
   }) {
-    return _then(_Loaded(
+    return _then(_ShowResults(
       characters: characters == freezed
           ? _value.characters
           : characters // ignore: cast_nullable_to_non_nullable
@@ -286,21 +453,21 @@ class __$LoadedCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.characters});
+class _$_ShowResults implements _ShowResults {
+  const _$_ShowResults({required this.characters});
 
   @override
   final List<Character> characters;
 
   @override
   String toString() {
-    return 'SearchState.loaded(characters: $characters)';
+    return 'SearchState.showResults(characters: $characters)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Loaded &&
+        (other is _ShowResults &&
             (identical(other.characters, characters) ||
                 const DeepCollectionEquality()
                     .equals(other.characters, characters)));
@@ -312,17 +479,19 @@ class _$_Loaded implements _Loaded {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadedCopyWith<_Loaded> get copyWith =>
-      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+  _$ShowResultsCopyWith<_ShowResults> get copyWith =>
+      __$ShowResultsCopyWithImpl<_ShowResults>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Character> characters) loaded,
+    required TResult Function(List<SearchRequest> searchRequests) showHistory,
+    required TResult Function(List<Character> characters) showResults,
+    required TResult Function(String? message) showError,
   }) {
-    return loaded(characters);
+    return showResults(characters);
   }
 
   @override
@@ -330,11 +499,13 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Character> characters)? loaded,
+    TResult Function(List<SearchRequest> searchRequests)? showHistory,
+    TResult Function(List<Character> characters)? showResults,
+    TResult Function(String? message)? showError,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(characters);
+    if (showResults != null) {
+      return showResults(characters);
     }
     return orElse();
   }
@@ -344,9 +515,11 @@ class _$_Loaded implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_ShowHistory value) showHistory,
+    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(_ShowError value) showError,
   }) {
-    return loaded(this);
+    return showResults(this);
   }
 
   @override
@@ -354,20 +527,149 @@ class _$_Loaded implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(_ShowHistory value)? showHistory,
+    TResult Function(_ShowResults value)? showResults,
+    TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(this);
+    if (showResults != null) {
+      return showResults(this);
     }
     return orElse();
   }
 }
 
-abstract class _Loaded implements SearchState {
-  const factory _Loaded({required List<Character> characters}) = _$_Loaded;
+abstract class _ShowResults implements SearchState {
+  const factory _ShowResults({required List<Character> characters}) =
+      _$_ShowResults;
 
   List<Character> get characters => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+  _$ShowResultsCopyWith<_ShowResults> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ShowErrorCopyWith<$Res> {
+  factory _$ShowErrorCopyWith(
+          _ShowError value, $Res Function(_ShowError) then) =
+      __$ShowErrorCopyWithImpl<$Res>;
+  $Res call({String? message});
+}
+
+/// @nodoc
+class __$ShowErrorCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
+    implements _$ShowErrorCopyWith<$Res> {
+  __$ShowErrorCopyWithImpl(_ShowError _value, $Res Function(_ShowError) _then)
+      : super(_value, (v) => _then(v as _ShowError));
+
+  @override
+  _ShowError get _value => super._value as _ShowError;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_ShowError(
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_ShowError implements _ShowError {
+  const _$_ShowError({required this.message});
+
+  @override
+  final String? message;
+
+  @override
+  String toString() {
+    return 'SearchState.showError(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ShowError &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ShowErrorCopyWith<_ShowError> get copyWith =>
+      __$ShowErrorCopyWithImpl<_ShowError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<SearchRequest> searchRequests) showHistory,
+    required TResult Function(List<Character> characters) showResults,
+    required TResult Function(String? message) showError,
+  }) {
+    return showError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<SearchRequest> searchRequests)? showHistory,
+    TResult Function(List<Character> characters)? showResults,
+    TResult Function(String? message)? showError,
+    required TResult orElse(),
+  }) {
+    if (showError != null) {
+      return showError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_ShowHistory value) showHistory,
+    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(_ShowError value) showError,
+  }) {
+    return showError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_ShowHistory value)? showHistory,
+    TResult Function(_ShowResults value)? showResults,
+    TResult Function(_ShowError value)? showError,
+    required TResult orElse(),
+  }) {
+    if (showError != null) {
+      return showError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowError implements SearchState {
+  const factory _ShowError({required String? message}) = _$_ShowError;
+
+  String? get message => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ShowErrorCopyWith<_ShowError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

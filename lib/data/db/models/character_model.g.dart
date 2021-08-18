@@ -29,13 +29,14 @@ class CharacterModelAdapter extends TypeAdapter<CharacterModel> {
       episode: (fields[9] as List).cast<String>(),
       url: fields[10] as String,
       created: fields[11] as DateTime,
+      cachedImageId: fields[12] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, CharacterModel obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -59,7 +60,9 @@ class CharacterModelAdapter extends TypeAdapter<CharacterModel> {
       ..writeByte(10)
       ..write(obj.url)
       ..writeByte(11)
-      ..write(obj.created);
+      ..write(obj.created)
+      ..writeByte(12)
+      ..write(obj.cachedImageId);
   }
 
   @override
