@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rick_and_morty_app/data/api/models/character_hint_dto.dart';
-import 'package:rick_and_morty_app/data/api/models/characters_dto.dart';
+import 'package:rick_and_morty_app/data/api/models/all_characters_dto.dart';
 import 'package:rick_and_morty_app/data/api/rick_and_morty_api.dart';
 
 import '../fixtures/fixture_reader.dart';
@@ -98,7 +98,7 @@ void main() {
 
   group('getCharacters', () {
     const filterName = 'rick';
-    final charactersModel = CharactersDto.fromJson(json
+    final charactersModel = AllCharactersDto.fromJson(json
         .decode(fixture('filtered_characters_on_request_$filterName.json')));
 
     test(

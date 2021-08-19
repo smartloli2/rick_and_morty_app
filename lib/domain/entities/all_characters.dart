@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
 import 'package:rick_and_morty_app/domain/entities/info.dart';
 
-class Characters extends Equatable {
+class AllCharacters extends Equatable {
   final Info info;
   final List<Character> results;
 
-  const Characters({
+  const AllCharacters({
     required this.info,
     required this.results,
   });

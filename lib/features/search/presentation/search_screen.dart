@@ -71,6 +71,7 @@ class SearchScreen extends HookWidget {
               ),
               showResults: (state) => CharactersListWidget(
                 characters: state.characters,
+                isLoadingMore: state.isLoadingMore,
                 updateHome: updateHome,
               ),
               showError: (state) => SearchErrorWidget(

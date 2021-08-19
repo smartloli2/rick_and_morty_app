@@ -31,7 +31,7 @@ class SearchInputFieldWidget extends HookWidget {
       onFieldSubmitted: (input) {
         focusNode.unfocus();
         context.read<SearchStore>()
-          ..showCharacters(input)
+          ..loadCharacters(input)
           ..saveSearchRequest(input);
       },
     );

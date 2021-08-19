@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:rick_and_morty_app/core/exceptions/exception.dart';
 import 'package:rick_and_morty_app/data/api/models/character_hint_dto.dart';
-import 'package:rick_and_morty_app/data/api/models/characters_dto.dart';
+import 'package:rick_and_morty_app/data/api/models/all_characters_dto.dart';
 
 import 'i_rick_and_morty_api.dart';
 
@@ -28,24 +28,12 @@ class RickAndMortyApi implements IRickAndMortyApi {
   }
 
   @override
-  Future<CharactersDto> getCharacters(String filterName) async {
-    try {
-      final Response response = await dio.get('character?name=$filterName');
+  Future<AllCharactersDto> getCharacters(String filterName) =>
+      _getCharactersViaUrl('character?name=$filterName');
 
-      if (response.statusCode == 200) {
-        return CharactersDto.fromJson(response.data);
-      }
-
-      // Todo: добавить обработку ошибок (не удалось найти, неизвестная и т.д.)
-
-      throw RickAndMortyException(
-        'Server request failed: status code: ${response.statusCode},'
-        ' data: ${response.data}',
-      );
-    } on DioError catch (e) {
-      throw RickAndMortyException(e.message);
-    }
-  }
+  @override
+  Future<AllCharactersDto> getMoreCharacters(String url) =>
+      _getCharactersViaUrl(url);
 
   @override
   Future<List<CharacterHintDto>> getCharacterHints(
@@ -71,6 +59,25 @@ class RickAndMortyApi implements IRickAndMortyApi {
       'Server request failed: status code: ${response.statusCode},'
       ' data: ${response.data}',
     );
+  }
+
+  Future<AllCharactersDto> _getCharactersViaUrl(String url) async {
+    try {
+      final Response response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        return AllCharactersDto.fromJson(response.data);
+      }
+
+      // Todo: добавить обработку ошибок (не удалось найти, неизвестная и т.д.)
+
+      throw RickAndMortyException(
+        'Server request failed: status code: ${response.statusCode},'
+        ' data: ${response.data}',
+      );
+    } on DioError catch (e) {
+      throw RickAndMortyException(e.message);
+    }
   }
 }
 

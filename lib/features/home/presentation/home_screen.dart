@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty_app/core/store_providers.dart';
 import 'package:rick_and_morty_app/core/widgets/loading_widget.dart';
 import 'package:rick_and_morty_app/core/widgets/null_widget.dart';
+import 'package:rick_and_morty_app/features/app/logic/theme_store.dart';
 import 'package:rick_and_morty_app/features/home/logic/recently_viewed_characters_store.dart';
 import 'package:rick_and_morty_app/features/home/presentation/common/character_horizontal_list_widget.dart';
 import 'package:rick_and_morty_app/features/search/presentation/search_screen.dart';
@@ -19,8 +21,25 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeStore = context.read<ThemeStore>();
     return Scaffold(
-      // appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          Observer(
+            builder: (context) => IconButton(
+              onPressed: () => themeStore.toggleTheme(),
+              icon: themeStore.themeMode == ThemeMode.light
+                  ? const FaIcon(
+                      FontAwesomeIcons.solidSun,
+                    )
+                  : const FaIcon(
+                      FontAwesomeIcons.solidMoon,
+                    ),
+            ),
+          )
+        ],
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(

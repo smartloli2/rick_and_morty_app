@@ -32,7 +32,7 @@ class HistoryWidget extends StatelessWidget {
             onTap: () {
               FocusScope.of(context).unfocus();
               textEditingController.text = request.value;
-              context.read<SearchStore>().showCharacters(request.value);
+              context.read<SearchStore>().loadCharacters(request.value);
             },
             child: InputChip(
               label: Text(

@@ -3,6 +3,7 @@ import 'package:rick_and_morty_app/core/log/i_log.dart';
 import 'package:rick_and_morty_app/data/repositories/character_repository.dart';
 import 'package:rick_and_morty_app/data/repositories/search_request_repository.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
+import 'package:rick_and_morty_app/domain/entities/info.dart';
 import 'package:rick_and_morty_app/domain/entities/search_request.dart';
 import 'package:rick_and_morty_app/features/search/logic/search_state.dart';
 
@@ -30,19 +31,14 @@ abstract class _SearchStore with Store {
   @observable
   SearchState searchState = const SearchState.initial();
 
-  // @observable
-  // Characters? characters;
-
-  // @observable
-  // Option<String> errorMessage = none();
-
-  // Store
   List<SearchRequest> _searchRequests = [];
 
-  @action
-  Future<void> showCharacters(String filterName) async {
-    // errorMessage = none();
+  List<Character> _characters = [];
 
+  Info? _info;
+
+  @action
+  Future<void> loadCharacters(String filterName) async {
     searchState = const SearchState.loading();
 
     final failOrCharacters =
@@ -51,11 +47,45 @@ abstract class _SearchStore with Store {
     failOrCharacters.fold((e) {
       searchState = const SearchState.showError(
           message: "Couldn't fetch characters. Is the device online?");
-    }, (characters) {
-      // this.characters = characters;
-      log.info(characters.results.toString());
-      searchState = SearchState.showResults(characters: characters.results);
+    }, (allCharacters) {
+      _characters = allCharacters.results;
+      _info = allCharacters.info;
+
+      searchState = SearchState.showResults(
+        characters: allCharacters.results,
+      );
     });
+  }
+
+  @action
+  Future<void> loadMoreCharacters() async {
+    final url = _info?.next;
+
+    log.debug('loading more characters');
+
+    if (url != null) {
+      searchState = SearchState.showResults(
+        characters: _characters,
+        isLoadingMore: true,
+      );
+
+      final additionalCharacters =
+          await _characterRepository.getMoreCharacters(url);
+
+      additionalCharacters.fold(
+        (l) {
+          log.warning("couldn't fetch more characters");
+        },
+        (newCharacters) {
+          _characters.addAll(newCharacters.results);
+          _info = newCharacters.info;
+
+          searchState = SearchState.showResults(
+            characters: _characters,
+          );
+        },
+      );
+    }
   }
 
   @action

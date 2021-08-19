@@ -17,7 +17,7 @@ class HeaderWidget extends StatelessWidget {
         Strings.appHeader,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 40,
+          fontSize: 35,
           fontFamily: 'Anton',
           fontWeight: FontWeight.w300,
         ),

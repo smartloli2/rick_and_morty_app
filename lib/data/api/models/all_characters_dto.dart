@@ -1,35 +1,36 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rick_and_morty_app/domain/entities/characters.dart';
+import 'package:rick_and_morty_app/domain/entities/all_characters.dart';
 
 import 'character_dto.dart';
 import 'info_dto.dart';
 
-part 'characters_dto.g.dart';
+part 'all_characters_dto.g.dart';
 
 @JsonSerializable()
-class CharactersDto extends Equatable {
+class AllCharactersDto extends Equatable {
   final InfoDto info;
   final List<CharacterDto> results;
 
-  const CharactersDto({
+  const AllCharactersDto({
     required this.info,
     required this.results,
   });
 
-  factory CharactersDto.fromJson(Map<String, dynamic> json) =>
-      _$CharactersDtoFromJson(json);
+  factory AllCharactersDto.fromJson(Map<String, dynamic> json) =>
+      _$AllCharactersDtoFromJson(json);
 
-  factory CharactersDto.fromDomain(Characters characters) => CharactersDto(
+  factory AllCharactersDto.fromDomain(AllCharacters characters) =>
+      AllCharactersDto(
         info: InfoDto.fromDomain(characters.info),
         results: characters.results
             .map((character) => CharacterDto.fromDomain(character))
             .toList(),
       );
 
-  Map<String, dynamic> toJson() => _$CharactersDtoToJson(this);
+  Map<String, dynamic> toJson() => _$AllCharactersDtoToJson(this);
 
-  Characters toDomain() => Characters(
+  AllCharacters toDomain() => AllCharacters(
         info: info.toDomain(),
         results: results.map((e) => e.toDomain()).toList(),
       );

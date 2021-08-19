@@ -28,7 +28,7 @@ class SearchErrorWidget extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               final store = context.read<SearchStore>();
-              store.showCharacters(textEditingController.text);
+              store.loadCharacters(textEditingController.text);
             },
             child: const Text(
               'Retry',

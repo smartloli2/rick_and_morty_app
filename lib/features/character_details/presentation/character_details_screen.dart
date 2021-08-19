@@ -23,12 +23,17 @@ class CharacterDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(character.name)),
-      body: Column(
-        children: [
-          MainCharacterInfoWidget(character),
-          LocationsInfoWidget(character),
-          EpisodesInfoWidget(character),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MainCharacterInfoWidget(character),
+            SizedBox(height: 2.0.h),
+            LocationsInfoWidget(character),
+            EpisodesInfoWidget(character),
+          ],
+        ),
       ),
     );
   }
@@ -41,54 +46,75 @@ class MainCharacterInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 45.0.w,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(character.image),
-            ),
+    final cachedImage = character.cachedImage?.imageFile;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 45.0.w,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: cachedImage != null
+                ? Image.file(cachedImage)
+                : Image.network(character.image),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    character.name,
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Species: ${character.species}',
-                    style: const TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                  Text(
-                    'Status: ${character.status}',
-                    style: const TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                  Text(
-                    'Gender: ${character.gender}',
-                    style: const TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
+        ),
+        SizedBox(width: 5.0.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                character.name,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
+              const Text(
+                'Race:',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                character.species,
+                style: const TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+              const Text(
+                'Status:',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                character.status,
+                style: const TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+              const Text(
+                'Gender:',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                character.gender,
+                style: const TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -100,7 +126,25 @@ class LocationsInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Last known location:',
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.grey,
+          ),
+        ),
+        SizedBox(height: 1.0.h),
+        Text(
+          character.location.name,
+          style: const TextStyle(
+            fontSize: 22,
+          ),
+        ),
+      ],
+    );
   }
 }
 

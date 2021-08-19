@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:rick_and_morty_app/core/constants/colors.dart';
 
 class AppTheme {
   static Color lightBackgroundColor = const Color(0xfff2f2f2);
@@ -21,6 +22,7 @@ class AppTheme {
     accentColor: lightAccentColor,
     backgroundColor: lightBackgroundColor,
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    secondaryHeaderColor: CustomColors.nearlyBlue,
   );
 
   static final darkTheme = ThemeData(
@@ -29,6 +31,7 @@ class AppTheme {
     accentColor: darkAccentColor,
     backgroundColor: darkBackgroundColor,
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    secondaryHeaderColor: Colors.black,
   );
 
   static Brightness? get currentSystemBrightness =>

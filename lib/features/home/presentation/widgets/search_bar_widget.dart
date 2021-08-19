@@ -36,7 +36,6 @@ class SearchBarWidget extends HookWidget {
               fontFamily: 'WorkSans',
               fontWeight: FontWeight.bold,
               fontSize: 14.0.sp,
-              color: CustomColors.nearlyBlue,
             ),
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
@@ -54,6 +53,7 @@ class SearchBarWidget extends HookWidget {
               border: InputBorder.none,
               hintStyle: TextStyle(
                 fontWeight: FontWeight.w300,
+                color: Theme.of(context).secondaryHeaderColor,
                 fontSize: 13.0.sp,
               ),
             ),

@@ -9,7 +9,7 @@ import 'package:rick_and_morty_app/data/db/i_storage_factory.dart';
 import 'package:rick_and_morty_app/data/db/models/character_model.dart';
 import 'package:rick_and_morty_app/domain/contracts/i_character_repository.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
-import 'package:rick_and_morty_app/domain/entities/characters.dart';
+import 'package:rick_and_morty_app/domain/entities/all_characters.dart';
 
 class CharacterRepository implements ICharacterRepository {
   final RickAndMortyApi rickAndMortyApi;
@@ -23,7 +23,7 @@ class CharacterRepository implements ICharacterRepository {
   });
 
   @override
-  Future<Either<RickAndMortyException, Characters>> getCharacters(
+  Future<Either<RickAndMortyException, AllCharacters>> getCharacters(
     String filterName,
   ) async {
     try {
@@ -36,7 +36,20 @@ class CharacterRepository implements ICharacterRepository {
   }
 
   @override
-  Future<Either<RickAndMortyException, Characters>> getCharacterHints(
+  Future<Either<RickAndMortyException, AllCharacters>> getMoreCharacters(
+    String url,
+  ) async {
+    try {
+      final response = await rickAndMortyApi.getMoreCharacters(url);
+      return right(response.toDomain());
+    } on RickAndMortyException catch (e) {
+      log.error(e.message);
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<RickAndMortyException, AllCharacters>> getCharacterHints(
     String filterName,
   ) {
     // TODO: implement getCharacterHints

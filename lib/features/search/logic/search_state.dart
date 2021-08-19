@@ -17,6 +17,7 @@ class SearchState with _$SearchState {
 
   const factory SearchState.showResults({
     required List<Character> characters,
+    @Default(false) bool isLoadingMore,
   }) = _ShowResults;
 
   const factory SearchState.showError({

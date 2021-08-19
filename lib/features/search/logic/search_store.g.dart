@@ -24,13 +24,22 @@ mixin _$SearchStore on _SearchStore, Store {
     });
   }
 
-  final _$showCharactersAsyncAction =
-      AsyncAction('_SearchStore.showCharacters');
+  final _$loadCharactersAsyncAction =
+      AsyncAction('_SearchStore.loadCharacters');
 
   @override
-  Future<void> showCharacters(String filterName) {
-    return _$showCharactersAsyncAction
-        .run(() => super.showCharacters(filterName));
+  Future<void> loadCharacters(String filterName) {
+    return _$loadCharactersAsyncAction
+        .run(() => super.loadCharacters(filterName));
+  }
+
+  final _$loadMoreCharactersAsyncAction =
+      AsyncAction('_SearchStore.loadMoreCharacters');
+
+  @override
+  Future<void> loadMoreCharacters() {
+    return _$loadMoreCharactersAsyncAction
+        .run(() => super.loadMoreCharacters());
   }
 
   final _$showSearchHistoryAsyncAction =
