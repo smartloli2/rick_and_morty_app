@@ -1,7 +1,10 @@
 import 'package:mobx/mobx.dart';
 import 'package:rick_and_morty_app/core/log/i_log.dart';
+import 'package:rick_and_morty_app/data/db/models/types/show_mode_type.dart';
 import 'package:rick_and_morty_app/data/repositories/character_repository.dart';
 import 'package:rick_and_morty_app/data/repositories/search_request_repository.dart';
+import 'package:rick_and_morty_app/data/repositories/settings_repository.dart';
+import 'package:rick_and_morty_app/domain/entities/app_settings.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
 import 'package:rick_and_morty_app/domain/entities/info.dart';
 import 'package:rick_and_morty_app/domain/entities/search_request.dart';
@@ -13,19 +16,23 @@ class SearchStore extends _SearchStore with _$SearchStore {
   SearchStore({
     required CharacterRepository characterRepository,
     required SearchRequestRepository searchRequestRepository,
+    required SettingsRepository settingsRepository,
   }) : super(
           characterRepository,
           searchRequestRepository,
+          settingsRepository,
         );
 }
 
 abstract class _SearchStore with Store {
   final CharacterRepository _characterRepository;
   final SearchRequestRepository _searchRequestRepository;
+  final SettingsRepository _settingsRepository;
 
   _SearchStore(
     this._characterRepository,
     this._searchRequestRepository,
+    this._settingsRepository,
   );
 
   @observable
@@ -36,6 +43,33 @@ abstract class _SearchStore with Store {
   List<Character> _characters = [];
 
   Info? _info;
+
+  AppSettings? appSettings;
+
+  ShowModeType get getShowModeType =>
+      appSettings?.showModeType ?? ShowModeType.list;
+
+  @action
+  Future<void> loadSettings() async {
+    final failOrSettings = await _settingsRepository.loadSettings();
+
+    failOrSettings.fold(
+      (fail) {
+        appSettings = AppSettings.byDefault();
+      },
+      (settings) {
+        log.debug('Settings was loaded');
+        appSettings = settings;
+      },
+    );
+
+    if (searchState is ShowResults) {
+      searchState = SearchState.showResults(
+        characters: _characters,
+        showModeType: getShowModeType,
+      );
+    }
+  }
 
   @action
   Future<void> loadCharacters(String filterName) async {
@@ -53,6 +87,7 @@ abstract class _SearchStore with Store {
 
       searchState = SearchState.showResults(
         characters: allCharacters.results,
+        showModeType: getShowModeType,
       );
     });
   }
@@ -66,6 +101,7 @@ abstract class _SearchStore with Store {
     if (url != null) {
       searchState = SearchState.showResults(
         characters: _characters,
+        showModeType: getShowModeType,
         isLoadingMore: true,
       );
 
@@ -82,6 +118,7 @@ abstract class _SearchStore with Store {
 
           searchState = SearchState.showResults(
             characters: _characters,
+            showModeType: getShowModeType,
           );
         },
       );

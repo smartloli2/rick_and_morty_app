@@ -41,7 +41,9 @@ class AppRouter {
                 _tryCastArgs<SearchScreenArguments>(settings.arguments);
 
             return StoreProvider1<SearchStore>(
-              onStoreCreated: (store) => store.showSearchHistory(),
+              onStoreCreated: (store) => store
+                ..showSearchHistory()
+                ..loadSettings(),
               child: SearchScreen(updateHome: args.updateHome),
             );
 

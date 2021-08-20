@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty_app/core/store_providers.dart';
 import 'package:rick_and_morty_app/core/widgets/loading_widget.dart';
 import 'package:rick_and_morty_app/core/widgets/null_widget.dart';
 import 'package:rick_and_morty_app/features/search/logic/search_store.dart';
-import 'package:rick_and_morty_app/features/search/presentation/widgets/characters_list_widget.dart';
+import 'package:rick_and_morty_app/features/search/logic/settings/settings_store.dart';
+import 'package:rick_and_morty_app/features/search/presentation/widgets/app_settings_widget.dart';
+import 'package:rick_and_morty_app/features/search/presentation/widgets/characters_widget.dart';
 import 'package:rick_and_morty_app/features/search/presentation/widgets/history_widget.dart';
 import 'package:rick_and_morty_app/features/search/presentation/widgets/search_error_widget.dart';
 
@@ -54,6 +57,23 @@ class SearchScreen extends HookWidget {
               textEditingConroller.clear();
             },
             icon: const Icon(Icons.close),
+          ),
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            onPressed: () {
+              showModalBottomSheet<void>(
+                context: context,
+                isScrollControlled: true,
+                enableDrag: true,
+                elevation: 5,
+                builder: (_) => StoreProvider1<SettingsStore>(
+                  onStoreCreated: (store) => store.loadSettings(),
+                  child: AppSettingsWidget(),
+                ),
+              ).then((_) {
+                context.read<SearchStore>().loadSettings();
+              });
+            },
           )
         ],
       ),
@@ -69,7 +89,8 @@ class SearchScreen extends HookWidget {
                 searchRequests: state.searchRequests,
                 textEditingController: textEditingConroller,
               ),
-              showResults: (state) => CharactersListWidget(
+              showResults: (state) => CharactersWidget(
+                showModeType: state.showModeType,
                 characters: state.characters,
                 isLoadingMore: state.isLoadingMore,
                 updateHome: updateHome,

@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/core/widgets/null_widget.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
-import 'package:rick_and_morty_app/features/character_details/presentation/character_details_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class CharacterTileWidget extends StatelessWidget {
   final Character character;
+  final void Function()? onTap;
+  final bool isCached;
 
-  const CharacterTileWidget(this.character);
+  const CharacterTileWidget({
+    required this.character,
+    required this.onTap,
+    this.isCached = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cachedImage = character.cachedImage?.imageFile;
 
-    if (cachedImage == null) return const NullWidget();
+    if (isCached && cachedImage == null) return const NullWidget();
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              CharacterDetailScreen.routeName,
-              arguments: CharacterDetailsArguments(character: character),
-            );
-          },
+          onTap: onTap,
           child: SizedBox(
+            height: 30.0.h,
             width: 45.0.w,
             child: GridTile(
               footer: GridTileBar(
@@ -36,10 +37,12 @@ class CharacterTileWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              child: Image.file(
-                cachedImage,
-                fit: BoxFit.cover,
-              ),
+              child: isCached
+                  ? Image.file(
+                      cachedImage!,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(character.image),
             ),
           ),
         ),

@@ -8,8 +8,10 @@ import 'package:rick_and_morty_app/data/db/hive_storage_factory.dart';
 import 'package:rick_and_morty_app/data/db/i_storage_factory.dart';
 import 'package:rick_and_morty_app/data/repositories/character_repository.dart';
 import 'package:rick_and_morty_app/data/repositories/search_request_repository.dart';
+import 'package:rick_and_morty_app/data/repositories/settings_repository.dart';
 import 'package:rick_and_morty_app/features/home/logic/recently_viewed_characters_store.dart';
 import 'package:rick_and_morty_app/features/search/logic/search_store.dart';
+import 'package:rick_and_morty_app/features/search/logic/settings/settings_store.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -55,6 +57,10 @@ void _registerRepositories() {
       storageFactory: getIt<IStorageFactory>(),
     ),
   );
+
+  getIt.registerLazySingleton<SettingsRepository>(() => SettingsRepository(
+        storageFactory: getIt<IStorageFactory>(),
+      ));
 }
 
 void _registerStores() {
@@ -62,11 +68,18 @@ void _registerStores() {
     () => SearchStore(
       characterRepository: getIt<CharacterRepository>(),
       searchRequestRepository: getIt<SearchRequestRepository>(),
+      settingsRepository: getIt<SettingsRepository>(),
     ),
   );
   getIt.registerFactory<RecentlyViewedCharactersStore>(
     () => RecentlyViewedCharactersStore(
       characterRepository: getIt<CharacterRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<SettingsStore>(
+    () => SettingsStore(
+      settingsRepository: getIt<SettingsRepository>(),
     ),
   );
 }

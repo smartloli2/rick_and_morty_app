@@ -24,6 +24,13 @@ mixin _$SearchStore on _SearchStore, Store {
     });
   }
 
+  final _$loadSettingsAsyncAction = AsyncAction('_SearchStore.loadSettings');
+
+  @override
+  Future<void> loadSettings() {
+    return _$loadSettingsAsyncAction.run(() => super.loadSettings());
+  }
+
   final _$loadCharactersAsyncAction =
       AsyncAction('_SearchStore.loadCharacters');
 

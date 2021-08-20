@@ -30,10 +30,13 @@ class _$SearchStateTearOff {
     );
   }
 
-  _ShowResults showResults(
-      {required List<Character> characters, bool isLoadingMore = false}) {
-    return _ShowResults(
+  ShowResults showResults(
+      {required List<Character> characters,
+      required ShowModeType showModeType,
+      bool isLoadingMore = false}) {
+    return ShowResults(
       characters: characters,
+      showModeType: showModeType,
       isLoadingMore: isLoadingMore,
     );
   }
@@ -55,7 +58,8 @@ mixin _$SearchState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SearchRequest> searchRequests) showHistory,
-    required TResult Function(List<Character> characters, bool isLoadingMore)
+    required TResult Function(List<Character> characters,
+            ShowModeType showModeType, bool isLoadingMore)
         showResults,
     required TResult Function(String? message) showError,
   }) =>
@@ -65,7 +69,8 @@ mixin _$SearchState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SearchRequest> searchRequests)? showHistory,
-    TResult Function(List<Character> characters, bool isLoadingMore)?
+    TResult Function(List<Character> characters, ShowModeType showModeType,
+            bool isLoadingMore)?
         showResults,
     TResult Function(String? message)? showError,
     required TResult orElse(),
@@ -76,7 +81,7 @@ mixin _$SearchState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_ShowHistory value) showHistory,
-    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(ShowResults value) showResults,
     required TResult Function(_ShowError value) showError,
   }) =>
       throw _privateConstructorUsedError;
@@ -85,7 +90,7 @@ mixin _$SearchState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_ShowHistory value)? showHistory,
-    TResult Function(_ShowResults value)? showResults,
+    TResult Function(ShowResults value)? showResults,
     TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) =>
@@ -147,7 +152,8 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SearchRequest> searchRequests) showHistory,
-    required TResult Function(List<Character> characters, bool isLoadingMore)
+    required TResult Function(List<Character> characters,
+            ShowModeType showModeType, bool isLoadingMore)
         showResults,
     required TResult Function(String? message) showError,
   }) {
@@ -160,7 +166,8 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SearchRequest> searchRequests)? showHistory,
-    TResult Function(List<Character> characters, bool isLoadingMore)?
+    TResult Function(List<Character> characters, ShowModeType showModeType,
+            bool isLoadingMore)?
         showResults,
     TResult Function(String? message)? showError,
     required TResult orElse(),
@@ -177,7 +184,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_ShowHistory value) showHistory,
-    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(ShowResults value) showResults,
     required TResult Function(_ShowError value) showError,
   }) {
     return initial(this);
@@ -189,7 +196,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_ShowHistory value)? showHistory,
-    TResult Function(_ShowResults value)? showResults,
+    TResult Function(ShowResults value)? showResults,
     TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {
@@ -243,7 +250,8 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SearchRequest> searchRequests) showHistory,
-    required TResult Function(List<Character> characters, bool isLoadingMore)
+    required TResult Function(List<Character> characters,
+            ShowModeType showModeType, bool isLoadingMore)
         showResults,
     required TResult Function(String? message) showError,
   }) {
@@ -256,7 +264,8 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SearchRequest> searchRequests)? showHistory,
-    TResult Function(List<Character> characters, bool isLoadingMore)?
+    TResult Function(List<Character> characters, ShowModeType showModeType,
+            bool isLoadingMore)?
         showResults,
     TResult Function(String? message)? showError,
     required TResult orElse(),
@@ -273,7 +282,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_ShowHistory value) showHistory,
-    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(ShowResults value) showResults,
     required TResult Function(_ShowError value) showError,
   }) {
     return loading(this);
@@ -285,7 +294,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_ShowHistory value)? showHistory,
-    TResult Function(_ShowResults value)? showResults,
+    TResult Function(ShowResults value)? showResults,
     TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {
@@ -368,7 +377,8 @@ class _$_ShowHistory implements _ShowHistory {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SearchRequest> searchRequests) showHistory,
-    required TResult Function(List<Character> characters, bool isLoadingMore)
+    required TResult Function(List<Character> characters,
+            ShowModeType showModeType, bool isLoadingMore)
         showResults,
     required TResult Function(String? message) showError,
   }) {
@@ -381,7 +391,8 @@ class _$_ShowHistory implements _ShowHistory {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SearchRequest> searchRequests)? showHistory,
-    TResult Function(List<Character> characters, bool isLoadingMore)?
+    TResult Function(List<Character> characters, ShowModeType showModeType,
+            bool isLoadingMore)?
         showResults,
     TResult Function(String? message)? showError,
     required TResult orElse(),
@@ -398,7 +409,7 @@ class _$_ShowHistory implements _ShowHistory {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_ShowHistory value) showHistory,
-    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(ShowResults value) showResults,
     required TResult Function(_ShowError value) showError,
   }) {
     return showHistory(this);
@@ -410,7 +421,7 @@ class _$_ShowHistory implements _ShowHistory {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_ShowHistory value)? showHistory,
-    TResult Function(_ShowResults value)? showResults,
+    TResult Function(ShowResults value)? showResults,
     TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {
@@ -432,33 +443,41 @@ abstract class _ShowHistory implements SearchState {
 }
 
 /// @nodoc
-abstract class _$ShowResultsCopyWith<$Res> {
-  factory _$ShowResultsCopyWith(
-          _ShowResults value, $Res Function(_ShowResults) then) =
-      __$ShowResultsCopyWithImpl<$Res>;
-  $Res call({List<Character> characters, bool isLoadingMore});
+abstract class $ShowResultsCopyWith<$Res> {
+  factory $ShowResultsCopyWith(
+          ShowResults value, $Res Function(ShowResults) then) =
+      _$ShowResultsCopyWithImpl<$Res>;
+  $Res call(
+      {List<Character> characters,
+      ShowModeType showModeType,
+      bool isLoadingMore});
 }
 
 /// @nodoc
-class __$ShowResultsCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
-    implements _$ShowResultsCopyWith<$Res> {
-  __$ShowResultsCopyWithImpl(
-      _ShowResults _value, $Res Function(_ShowResults) _then)
-      : super(_value, (v) => _then(v as _ShowResults));
+class _$ShowResultsCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
+    implements $ShowResultsCopyWith<$Res> {
+  _$ShowResultsCopyWithImpl(
+      ShowResults _value, $Res Function(ShowResults) _then)
+      : super(_value, (v) => _then(v as ShowResults));
 
   @override
-  _ShowResults get _value => super._value as _ShowResults;
+  ShowResults get _value => super._value as ShowResults;
 
   @override
   $Res call({
     Object? characters = freezed,
+    Object? showModeType = freezed,
     Object? isLoadingMore = freezed,
   }) {
-    return _then(_ShowResults(
+    return _then(ShowResults(
       characters: characters == freezed
           ? _value.characters
           : characters // ignore: cast_nullable_to_non_nullable
               as List<Character>,
+      showModeType: showModeType == freezed
+          ? _value.showModeType
+          : showModeType // ignore: cast_nullable_to_non_nullable
+              as ShowModeType,
       isLoadingMore: isLoadingMore == freezed
           ? _value.isLoadingMore
           : isLoadingMore // ignore: cast_nullable_to_non_nullable
@@ -468,27 +487,35 @@ class __$ShowResultsCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_ShowResults implements _ShowResults {
-  const _$_ShowResults({required this.characters, this.isLoadingMore = false});
+class _$ShowResults implements ShowResults {
+  const _$ShowResults(
+      {required this.characters,
+      required this.showModeType,
+      this.isLoadingMore = false});
 
   @override
   final List<Character> characters;
+  @override
+  final ShowModeType showModeType;
   @JsonKey(defaultValue: false)
   @override
   final bool isLoadingMore;
 
   @override
   String toString() {
-    return 'SearchState.showResults(characters: $characters, isLoadingMore: $isLoadingMore)';
+    return 'SearchState.showResults(characters: $characters, showModeType: $showModeType, isLoadingMore: $isLoadingMore)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ShowResults &&
+        (other is ShowResults &&
             (identical(other.characters, characters) ||
                 const DeepCollectionEquality()
                     .equals(other.characters, characters)) &&
+            (identical(other.showModeType, showModeType) ||
+                const DeepCollectionEquality()
+                    .equals(other.showModeType, showModeType)) &&
             (identical(other.isLoadingMore, isLoadingMore) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoadingMore, isLoadingMore)));
@@ -498,12 +525,13 @@ class _$_ShowResults implements _ShowResults {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(characters) ^
+      const DeepCollectionEquality().hash(showModeType) ^
       const DeepCollectionEquality().hash(isLoadingMore);
 
   @JsonKey(ignore: true)
   @override
-  _$ShowResultsCopyWith<_ShowResults> get copyWith =>
-      __$ShowResultsCopyWithImpl<_ShowResults>(this, _$identity);
+  $ShowResultsCopyWith<ShowResults> get copyWith =>
+      _$ShowResultsCopyWithImpl<ShowResults>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -511,11 +539,12 @@ class _$_ShowResults implements _ShowResults {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SearchRequest> searchRequests) showHistory,
-    required TResult Function(List<Character> characters, bool isLoadingMore)
+    required TResult Function(List<Character> characters,
+            ShowModeType showModeType, bool isLoadingMore)
         showResults,
     required TResult Function(String? message) showError,
   }) {
-    return showResults(characters, isLoadingMore);
+    return showResults(characters, showModeType, isLoadingMore);
   }
 
   @override
@@ -524,13 +553,14 @@ class _$_ShowResults implements _ShowResults {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SearchRequest> searchRequests)? showHistory,
-    TResult Function(List<Character> characters, bool isLoadingMore)?
+    TResult Function(List<Character> characters, ShowModeType showModeType,
+            bool isLoadingMore)?
         showResults,
     TResult Function(String? message)? showError,
     required TResult orElse(),
   }) {
     if (showResults != null) {
-      return showResults(characters, isLoadingMore);
+      return showResults(characters, showModeType, isLoadingMore);
     }
     return orElse();
   }
@@ -541,7 +571,7 @@ class _$_ShowResults implements _ShowResults {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_ShowHistory value) showHistory,
-    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(ShowResults value) showResults,
     required TResult Function(_ShowError value) showError,
   }) {
     return showResults(this);
@@ -553,7 +583,7 @@ class _$_ShowResults implements _ShowResults {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_ShowHistory value)? showHistory,
-    TResult Function(_ShowResults value)? showResults,
+    TResult Function(ShowResults value)? showResults,
     TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {
@@ -564,15 +594,17 @@ class _$_ShowResults implements _ShowResults {
   }
 }
 
-abstract class _ShowResults implements SearchState {
-  const factory _ShowResults(
+abstract class ShowResults implements SearchState {
+  const factory ShowResults(
       {required List<Character> characters,
-      bool isLoadingMore}) = _$_ShowResults;
+      required ShowModeType showModeType,
+      bool isLoadingMore}) = _$ShowResults;
 
   List<Character> get characters => throw _privateConstructorUsedError;
+  ShowModeType get showModeType => throw _privateConstructorUsedError;
   bool get isLoadingMore => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ShowResultsCopyWith<_ShowResults> get copyWith =>
+  $ShowResultsCopyWith<ShowResults> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -641,7 +673,8 @@ class _$_ShowError implements _ShowError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SearchRequest> searchRequests) showHistory,
-    required TResult Function(List<Character> characters, bool isLoadingMore)
+    required TResult Function(List<Character> characters,
+            ShowModeType showModeType, bool isLoadingMore)
         showResults,
     required TResult Function(String? message) showError,
   }) {
@@ -654,7 +687,8 @@ class _$_ShowError implements _ShowError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SearchRequest> searchRequests)? showHistory,
-    TResult Function(List<Character> characters, bool isLoadingMore)?
+    TResult Function(List<Character> characters, ShowModeType showModeType,
+            bool isLoadingMore)?
         showResults,
     TResult Function(String? message)? showError,
     required TResult orElse(),
@@ -671,7 +705,7 @@ class _$_ShowError implements _ShowError {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_ShowHistory value) showHistory,
-    required TResult Function(_ShowResults value) showResults,
+    required TResult Function(ShowResults value) showResults,
     required TResult Function(_ShowError value) showError,
   }) {
     return showError(this);
@@ -683,7 +717,7 @@ class _$_ShowError implements _ShowError {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_ShowHistory value)? showHistory,
-    TResult Function(_ShowResults value)? showResults,
+    TResult Function(ShowResults value)? showResults,
     TResult Function(_ShowError value)? showError,
     required TResult orElse(),
   }) {

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rick_and_morty_app/data/db/models/types/show_mode_type.dart';
 import 'package:rick_and_morty_app/domain/entities/character.dart';
 import 'package:rick_and_morty_app/domain/entities/search_request.dart';
 
@@ -17,8 +18,9 @@ class SearchState with _$SearchState {
 
   const factory SearchState.showResults({
     required List<Character> characters,
+    required ShowModeType showModeType,
     @Default(false) bool isLoadingMore,
-  }) = _ShowResults;
+  }) = ShowResults;
 
   const factory SearchState.showError({
     required String? message,
