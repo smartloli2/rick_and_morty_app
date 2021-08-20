@@ -1,0 +1,88 @@
+{
+    "data": {
+        "characters": {
+            "results": [
+                {
+                    "id": "2",
+                    "name": "Morty Smith"
+                },
+                {
+                    "id": "14",
+                    "name": "Alien Morty"
+                },
+                {
+                    "id": "18",
+                    "name": "Antenna Morty"
+                },
+                {
+                    "id": "21",
+                    "name": "Aqua Morty"
+                },
+                {
+                    "id": "27",
+                    "name": "Artist Morty"
+                },
+                {
+                    "id": "42",
+                    "name": "Big Head Morty"
+                },
+                {
+                    "id": "43",
+                    "name": "Big Morty"
+                },
+                {
+                    "id": "44",
+                    "name": "Body Guard Morty"
+                },
+                {
+                    "id": "53",
+                    "name": "Blue Shirt Morty"
+                },
+                {
+                    "id": "61",
+                    "name": "Campaign Manager Morty"
+                },
+                {
+                    "id": "73",
+                    "name": "Cop Morty"
+                },
+                {
+                    "id": "77",
+                    "name": "Cowboy Morty"
+                },
+                {
+                    "id": "83",
+                    "name": "Cronenberg Morty"
+                },
+                {
+                    "id": "84",
+                    "name": "Cult Leader Morty"
+                },
+                {
+                    "id": "85",
+                    "name": "Cyclops Morty"
+                },
+                {
+                    "id": "95",
+                    "name": "Dipper and Mabel Mortys"
+                },
+                {
+                    "id": "113",
+                    "name": "Eric Stoltz Mask Morty"
+                },
+                {
+                    "id": "118",
+                    "name": "Evil Morty"
+                },
+                {
+                    "id": "123",
+                    "name": "Fat Morty"
+                },
+                {
+                    "id": "143",
+                    "name": "Glasses Morty"
+                }
+            ]
+        }
+    }
+}
